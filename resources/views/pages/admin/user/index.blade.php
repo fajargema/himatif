@@ -51,6 +51,7 @@
                         <th>Nama</th>
                         <th>Semester</th>
                         <th>E-Mail</th>
+                        <th>Jabatan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -62,6 +63,11 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->semester }}</td>
                         <td>{{ $item->email }}</td>
+                        <td>
+                            @foreach ($item->getRoleNames() as $role)
+                            <label class="badge badge-info">{{ $role }}</label>
+                            @endforeach
+                        </td>
                         <td>
                             <button type="button" class="btn btn-primary shadow btn-sm mr-1" data-toggle="modal"
                                 data-target=".edit{{ $item->id }}">

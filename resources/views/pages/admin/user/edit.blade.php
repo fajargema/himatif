@@ -16,6 +16,18 @@
                         <label>Nama Pengurus*</label>
                         <input type="text" class="form-control" name="name" value="{{ old('name') ?? $item->name }}">
                     </div>
+
+                    <div class="form-group">
+                        <label for="">Role</label>
+                        <select name="role[]" class="form-control {{ $errors->has('role') ? 'is-invalid':'' }}"
+                            required>
+                            <option value="">Pilih</option>
+                            @foreach ($jabatan as $row)
+                            <option value="{{ $row->name }}">{{ $row->name }}</option>
+                            @endforeach
+                        </select>
+                        <p class="text-danger">{{ $errors->first('role') }}</p>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger light" data-dismiss="modal">Batal</button>
