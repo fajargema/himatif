@@ -27,10 +27,16 @@
         Master
     </div>
 
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ request()->routeIs('dashboard.user.index') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('dashboard.user.index') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>User</span></a>
+    </li>
+
+    <li class="nav-item {{ request()->routeIs('dashboard.meet.index') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('dashboard.meet.index') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Rapat</span></a>
     </li>
 
 
