@@ -25,4 +25,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('dashboard')->group(function () {
     Route::resource('user', App\Http\Controllers\Admin\UserController::class);
     Route::resource('meet', App\Http\Controllers\Admin\MeetController::class);
+    Route::get('scan/{id}', [App\Http\Controllers\Admin\MeetController::class, 'scan'])->name('meet.scan');
 });

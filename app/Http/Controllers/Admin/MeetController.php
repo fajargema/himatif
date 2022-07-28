@@ -139,4 +139,11 @@ class MeetController extends Controller
             return redirect()->route('dashboard.meet.index')->with('error', 'Rapat Gagal dihapus!!');
         }
     }
+
+    public function scan($id)
+    {
+        $data = Meet::findOrFail($id);
+
+        return view('pages.admin.meet.scan', compact('data'));
+    }
 }

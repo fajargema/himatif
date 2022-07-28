@@ -12,6 +12,8 @@
         <h5>
             Detail Rapat
         </h5>
+
+        <a href="{{ route('dashboard.meet.scan', $data->id) }}" class="btn btn-info">Scan</a>
     </div>
     <div class="card-body">
 
