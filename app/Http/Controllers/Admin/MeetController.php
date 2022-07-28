@@ -72,7 +72,9 @@ class MeetController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Meet::findOrFail($id);
+
+        return view('pages.admin.meet.detail', compact('data'));
     }
 
     /**
