@@ -55,7 +55,7 @@
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <label>Tanggal Rapat</label>
-                    <input type="date" class="form-control" name="date" value="{{ old('date') }}">
+                    <input type="date" class="form-control" name="tanggal" value="{{ old('date') }}">
                 </div>
                 <div class="col-sm-6">
                     <label>Jam Rapat</label>

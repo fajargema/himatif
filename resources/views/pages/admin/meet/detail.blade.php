@@ -31,6 +31,11 @@
                 <label><strong>Tempat Rapat :</strong></label>
                 <p>{{ $data->tempat }}</p>
 
+
+
+            </div>
+
+            <div class="col-lg-5">
                 <label><strong>Jenis Rapat :</strong></label>
                 <p>{{ $data->jenis }}</p>
 
@@ -39,15 +44,6 @@
 
                 <label><strong>Deskripsi Produk :</strong></label>
                 {!! $data->deskripsi !!}
-
-            </div>
-
-            <div class="col-lg-5">
-                <a href="https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl={{$data->kode}}&choe=UTF-8"
-                    download="https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl={{$data->kode}}&choe=UTF-8">
-                    <img src="https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl={{$data->kode}}&choe=UTF-8"
-                        alt="">
-                </a>
             </div>
 
         </div>

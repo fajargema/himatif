@@ -69,6 +69,9 @@
                             @endforeach
                         </td>
                         <td>
+                            <a href="{{ route('dashboard.user.show', $item->id) }}" class="btn btn-info btn-sm mr-1">
+                                <i class="fas fa-book-open"></i>
+                            </a>
                             <button type="button" class="btn btn-primary shadow btn-sm mr-1" data-toggle="modal"
                                 data-target=".edit{{ $item->id }}">
                                 <i class="fas fa-edit"></i>

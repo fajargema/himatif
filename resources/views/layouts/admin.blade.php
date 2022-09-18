@@ -8,8 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Himatif</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('adm/img/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('adm/img/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('adm/img/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('adm/img/favicon/site.webmanifest') }}">
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('adm/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -23,6 +29,9 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.5.1/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.5.1/sweetalert2.all.min.js"></script>
 
 </head>
 

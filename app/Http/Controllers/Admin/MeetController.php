@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Absent;
 use App\Models\Meet;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,11 +51,10 @@ class MeetController extends Controller
             'tempat' => 'required',
         ]);
         try {
-            $awal = 'sikab';
             $akhir = Meet::max('id');
 
             $data = $request->all();
-            $data['kode'] = sprintf("%03s", abs($akhir + 1)) . '-' . $awal . '-' . $request->jenis . '-' . date('dmY');
+            $data['kode'] = sprintf("%03s", abs($akhir + 1)) . '-' . $request->jenis . '-' . date('dmY');
             $data['users_id'] = Auth::user()->id;
             Meet::create($data);
 
@@ -145,5 +146,37 @@ class MeetController extends Controller
         $data = Meet::findOrFail($id);
 
         return view('pages.admin.meet.scan', compact('data'));
+    }
+
+    public function scanResult(Request $request)
+    {
+        try {
+
+            $dat = User::where('nim', $request->nonim)->first();
+            $cek = Absent::where('mahas_id', $dat->id)->where('meets_id', $request->meets)->count();
+
+            if ($cek == 0) {
+                Absent::create([
+                    'users_id' => Auth::user()->id,
+                    'mahas_id' => $dat->id,
+                    'meets_id' => $request->meets,
+                ]);
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Berhasil Absen',
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal! Kamu sudah absen',
+                ]);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 }

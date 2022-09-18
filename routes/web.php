@@ -26,4 +26,5 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
     Route::resource('user', App\Http\Controllers\Admin\UserController::class);
     Route::resource('meet', App\Http\Controllers\Admin\MeetController::class);
     Route::get('scan/{id}', [App\Http\Controllers\Admin\MeetController::class, 'scan'])->name('meet.scan');
+    Route::post('scan/result', [App\Http\Controllers\Admin\MeetController::class, 'scanResult'])->name('meet.scan-result');
 });
