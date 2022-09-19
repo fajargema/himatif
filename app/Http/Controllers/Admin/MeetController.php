@@ -74,8 +74,9 @@ class MeetController extends Controller
     public function show($id)
     {
         $data = Meet::findOrFail($id);
+        $user = User::with(['absents'])->get();
 
-        return view('pages.admin.meet.detail', compact('data'));
+        return view('pages.admin.meet.detail', compact('data', 'user'));
     }
 
     /**

@@ -62,10 +62,10 @@ class UserController extends Controller
             foreach ($request->role as $value) {
                 $user->assignRole($value);
             }
-            return redirect()->route('user.index')->with('success', 'Pengurus berhasil ditambah!!');
+            return redirect()->route('dashboard.user.index')->with('success', 'Pengurus berhasil ditambah!!');
         } catch (Exception $e) {
             dd($e->getMessage());
-            return redirect()->route('user.index')->with('error', 'Pengurus Gagal ditambah!!');
+            return redirect()->route('dashboard.user.index')->with('error', 'Pengurus Gagal ditambah!!');
         }
     }
 
@@ -115,10 +115,10 @@ class UserController extends Controller
 
             $profil->syncRoles($request->role);
 
-            return redirect()->route('user.index')->with('success', 'Pengurus berhasil diubah!!');
+            return redirect()->route('dashboard.user.index')->with('success', 'Pengurus berhasil diubah!!');
         } catch (Exception $e) {
             dd($e->getMessage());
-            return redirect()->route('user.index')->with('error', 'Pengurus Gagal diubah!!');
+            return redirect()->route('dashboard.user.index')->with('error', 'Pengurus Gagal diubah!!');
         }
     }
 
@@ -134,9 +134,9 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->delete();
 
-            return redirect()->route('user.index')->with('success', 'Pengurus berhasil dihapus!!');
+            return redirect()->route('dashboard.user.index')->with('success', 'Pengurus berhasil dihapus!!');
         } catch (Exception $e) {
-            return redirect()->route('user.index')->with('error', 'Pengurus Gagal dihapus!!');
+            return redirect()->route('dashboard.user.index')->with('error', 'Pengurus Gagal dihapus!!');
         }
     }
 }

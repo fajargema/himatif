@@ -36,7 +36,7 @@
                         <td>{{ $item->nama }}</td>
                         <td>{!! $item->deskripsi!!}</td>
                         <td>
-                            {{ Carbon\Carbon::parse($item['tanggal'])->isoFormat('dddd, d MMMM Y') }} -
+                            {{ Carbon\Carbon::parse($item['tanggal'])->isoFormat('dddd, D MMMM Y') }} -
                             {{ Carbon\Carbon::parse($item['waktu'])->format('H:i:s') }} WIB
                         </td>
                         <td>{{ $item->tempat }}</td>
@@ -84,8 +84,8 @@
           var name = $(this).data("name");
           event.preventDefault();
           swal({
-              title: `Are you sure you want to delete this record?`,
-              text: "If you delete this, it will be gone forever.",
+              title: `Apakah Anda yakin menghapus data ini?`,
+              text: "Jika Anda menghapus data ini, data tidak bisa kembali.",
               icon: "warning",
               buttons: true,
               dangerMode: true,

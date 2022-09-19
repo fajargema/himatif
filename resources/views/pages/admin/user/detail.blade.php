@@ -225,7 +225,7 @@
                         <div class="user-image">
                             <img src="{{ asset('adm/img/pro.jpg') }}" class="img-radius" alt="User-Profile-Image">
                         </div>
-                        <h6 class="f-w-600 m-t-25 m-b-10">Fajar Gema Ramadhan</h6>
+                        <h6 class="f-w-600 m-t-25 m-b-10">{{ $data->name }}</h6>
                         <p class="text-muted">Teknik Informatika</p>
                         <ul class="list-unstyled activity-leval">
                             <li class="active"></li>
@@ -258,8 +258,8 @@
                             </a>
                         </div>
 
-                        <h6 class="f-w-600 m-t-25 m-b-10">20200120037</h6>
-                        <p class="text-muted">fajar.ramadhan.ti.20@cic.ac.id</p>
+                        <h6 class="f-w-600 m-t-25 m-b-10">{{ $data->nim }}</h6>
+                        <p class="text-muted">{{ $data->email }}</p>
                         <ul class="list-unstyled activity-leval">
                             <li class="active"></li>
                             <li class="active"></li>
