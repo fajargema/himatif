@@ -18,8 +18,11 @@ class FinanceController extends Controller
     public function index()
     {
         $data = Finance::with(['user'])->latest()->get();
+        $pemasukan = Finance::where('jenis', "Pemasukan")->sum('jumlah');
+        $pengeluaran = Finance::where('jenis', "Pengeluaran")->sum('jumlah');
+        $saldo =  $pemasukan - $pengeluaran;
 
-        return view('pages.admin.finance.index', compact('data'));
+        return view('pages.admin.finance.index', compact('data', 'saldo'));
     }
 
     /**
@@ -48,21 +51,8 @@ class FinanceController extends Controller
             'keterangan' => 'required',
         ]);
         try {
-            $fin = Finance::latest()->first();
-            if (isset($fin)) {
-                if ($request->jenis == "Pemasukan") {
-                    $saldo = $fin->saldo + $request->jumlah;
-                } else if ($request->jenis == "Pengeluaran") {
-                    $saldo = $fin->saldo - $request->jumlah;
-                }
-            } else {
-                $saldo = $request->jumlah;
-            }
-
-
             $data = $request->all();
             $data['users_id'] = Auth::user()->id;
-            $data['saldo'] = $saldo;
             Finance::create($data);
 
             return redirect()->route('dashboard.finance.index')->with('success', 'Laporan berhasil dibuat!!');
@@ -81,8 +71,11 @@ class FinanceController extends Controller
     public function show($id)
     {
         $data = Finance::findOrFail($id);
+        $pemasukan = Finance::where('jenis', "Pemasukan")->sum('jumlah');
+        $pengeluaran = Finance::where('jenis', "Pengeluaran")->sum('jumlah');
+        $saldo =  $pemasukan - $pengeluaran;
 
-        return view('pages.admin.finance.detail', compact('data'));
+        return view('pages.admin.finance.detail', compact('data', 'saldo'));
     }
 
     /**
@@ -115,23 +108,10 @@ class FinanceController extends Controller
             'keterangan' => 'required',
         ]);
         try {
-            $max = Finance::max('id');
-            $hitung = $max - 1;
-            $fin = Finance::where('id', $hitung)->first();
-            if (isset($fin)) {
-                if ($request->jenis == "Pemasukan") {
-                    $saldo = $fin->saldo + $request->jumlah;
-                } else if ($request->jenis == "Pengeluaran") {
-                    $saldo = $fin->saldo - $request->jumlah;
-                }
-            } else {
-                $saldo = $request->jumlah;
-            }
             $finance = Finance::findOrFail($id);
 
             $data = $request->all();
             $data['users_id'] = Auth::user()->id;
-            $data['saldo'] = $saldo;
 
             $finance->update($data);
 

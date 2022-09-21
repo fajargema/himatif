@@ -10,7 +10,7 @@ class Finance extends Model
     use HasFactory;
 
     protected $fillable = [
-        'judul', 'jumlah', 'tanggal', 'keterangan', 'saldo', 'jenis', 'users_id'
+        'judul', 'jumlah', 'tanggal', 'keterangan', 'jenis', 'users_id'
     ];
 
     public function user()

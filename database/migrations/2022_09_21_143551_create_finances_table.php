@@ -20,7 +20,6 @@ return new class extends Migration
             $table->date('tanggal');
             $table->text('keterangan');
             $table->string('jenis');
-            $table->integer('saldo');
             $table->unsignedBigInteger('users_id');
 
             $table->foreign('users_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

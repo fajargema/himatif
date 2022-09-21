@@ -4,7 +4,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Laporan Keungan</h1>
-    <h4>Saldo Terakhir : {{ rupiah($data->first()->saldo) }}</h4>
+    <h4>Saldo Terakhir : {{ rupiah($saldo) }}</h4>
 </div>
 
 
