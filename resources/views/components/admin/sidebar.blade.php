@@ -39,6 +39,12 @@
             <span>Rapat</span></a>
     </li>
 
+    <li class="nav-item {{ request()->routeIs('dashboard.finance.index') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('dashboard.finance.index') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Keuangan</span></a>
+    </li>
+
 
 
     <!-- Divider -->
