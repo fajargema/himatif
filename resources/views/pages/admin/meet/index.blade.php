@@ -34,7 +34,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->nama }}</td>
-                        <td>{!! $item->deskripsi!!}</td>
+                        <td>{!! $item->deskripsi !!}</td>
                         <td>
                             {{ Carbon\Carbon::parse($item['tgl_waktu'])->isoFormat('dddd, D MMMM Y') }} -
                             {{ Carbon\Carbon::parse($item['tgl_waktu'])->format('H:i:s') }} WIB

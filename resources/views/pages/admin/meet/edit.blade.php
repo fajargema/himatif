@@ -55,23 +55,10 @@
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <label>Tanggal Rapat</label>
-                    <input type="date" class="form-control" name="tanggal"
-                        value="{{ old('tanggal') ?? Carbon\Carbon::parse($data['tanggal'])->format('Y-m-d') }}">
+                    <input type="datetime-local" class="form-control" name="tgl_waktu"
+                        value="{{ old('tgl_waktu') ?? Carbon\Carbon::parse($data['tgl_waktu'])->format('Y-m-d H:i') }}">
                 </div>
                 <div class="col-sm-6">
-                    <label>Jam Rapat</label>
-                    <input type="time" class="form-control" name="waktu"
-                        value="{{ old('waktu') ?? Carbon\Carbon::parse($data['waktu'])->format('H:i:s') }}">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Deskripsi Rapat</label>
-                <textarea name="deskripsi" class="form-control">{{ old('deskripsi') ?? $data->deskripsi }}</textarea>
-            </div>
-
-            <div class="form-group">
-                <div class="form-group">
                     <label>Jenis Rapat</label>
                     <select class="form-control" name="jenis">
                         <option>------Pilih Jenis------</option>
@@ -81,6 +68,11 @@
                         <option value="Offline">Offline</option>
                     </select>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label>Deskripsi Rapat</label>
+                <textarea name="deskripsi" class="form-control">{{ old('deskripsi') ?? $data->deskripsi }}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Simpan</button>
