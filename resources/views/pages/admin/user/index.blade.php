@@ -3,23 +3,21 @@
 @section('content')
 
 @if ($errors->any())
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <span class="badge badge-lg light badge-danger mb-2">There's something wrong!</span>
+<div class="row mb-3">
+    <div class="col-12">
+        <span class="badge badge-lg light badge-danger mb-2">There's something wrong!</span>
 
-            <div class="card">
-                <div class="card-body">
-                    <div class="row justify-content-between">
-                        <div class="col-lg-12">
-                            <ul class="list-icons">
-                                @foreach ($errors->all() as $error)
-                                <li>
-                                    <span class="align-middle mr-2"><i class="ti-angle-right"></i></span> {{ $error }}
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row justify-content-between">
+                    <div class="col-lg-12">
+                        <ul class="list-icons">
+                            @foreach ($errors->all() as $error)
+                            <li>
+                                <span class="align-middle mr-2"><i class="ti-angle-right"></i></span> {{ $error }}
+                            </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>

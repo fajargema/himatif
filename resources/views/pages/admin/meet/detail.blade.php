@@ -129,7 +129,9 @@
                     </td>
                 </tr>
                 @empty
-
+                <tr>
+                    <td colspan="5" class="text-center">Data tidak ada</td>
+                </tr>
                 @endforelse
                 <tr></tr>
             </tbody>

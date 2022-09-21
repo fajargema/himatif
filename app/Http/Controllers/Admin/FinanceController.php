@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailFinance;
 use App\Models\Finance;
 use Exception;
 use Illuminate\Http\Request;
@@ -70,12 +71,13 @@ class FinanceController extends Controller
      */
     public function show($id)
     {
-        $data = Finance::findOrFail($id);
+        $data = Finance::with(['user', 'details'])->findOrFail($id);
+        $detail = DetailFinance::with(['user', 'rapat'])->where('finances_id', $data->id)->latest()->get();
         $pemasukan = Finance::where('jenis', "Pemasukan")->sum('jumlah');
         $pengeluaran = Finance::where('jenis', "Pengeluaran")->sum('jumlah');
         $saldo =  $pemasukan - $pengeluaran;
 
-        return view('pages.admin.finance.detail', compact('data', 'saldo'));
+        return view('pages.admin.finance.detail', compact('data', 'detail', 'saldo'));
     }
 
     /**
@@ -137,6 +139,87 @@ class FinanceController extends Controller
             return redirect()->route('dashboard.finance.index')->with('success', 'Laporan berhasil dihapus!!');
         } catch (Exception) {
             return redirect()->route('dashboard.finance.index')->with('error', 'Laporan Gagal dihapus!!');
+        }
+    }
+
+    public function simpanDetail(Request $request)
+    {
+        $request->validate([
+            'satuan' => 'required',
+            'qty' => 'required',
+            'harga' => 'required',
+            'keterangan' => 'required',
+            'finances_id' => 'required',
+        ]);
+        try {
+            // Simpan Detail Finance
+            $data = $request->all();
+            $data['users_id'] = Auth::user()->id;
+            $data['total'] = $request->qty * $request->harga;
+            DetailFinance::create($data);
+
+            // Update Jumlah Finance
+            $jumlah = DetailFinance::sum('total');
+            $lap = Finance::where('id', $request->finances_id)->first();
+            $fin = $request->all();
+            $fin['jumlah'] = $jumlah;
+            $lap->update($fin);
+
+            return redirect()->back()->with('success', 'Paparan berhasil dibuat!!');
+        } catch (Exception $e) {
+            dd($e->getMessage());
+            return redirect()->back()->with('error', 'Paparan Gagal dibuat!!');
+        }
+    }
+
+    public function ubahDetail(Request $request, $id)
+    {
+        $request->validate([
+            'satuan' => 'required',
+            'qty' => 'required',
+            'harga' => 'required',
+            'keterangan' => 'required',
+            'finances_id' => 'required',
+        ]);
+        try {
+            $finance = DetailFinance::findOrFail($id);
+
+            $data = $request->all();
+            $data['users_id'] = Auth::user()->id;
+            $data['total'] = $request->qty * $request->harga;
+
+            $finance->update($data);
+
+            // Update Jumlah Finance
+            $jumlah = DetailFinance::sum('total');
+            $lap = Finance::where('id', $request->finances_id)->first();
+            $fin = $request->all();
+            $fin['jumlah'] = $jumlah;
+            $lap->update($fin);
+
+            return redirect()->back()->with('success', 'Paparan berhasil diupdate!!');
+        } catch (Exception $e) {
+            dd($e->getMessage());
+            return redirect()->back()->with('error', 'Paparan Gagal diupdate!!');
+        }
+    }
+
+    public function hapusDetail(Request $request, $id)
+    {
+        try {
+            $finance = DetailFinance::findOrFail($id);
+            $finance->delete();
+
+            // Update Jumlah Finance
+            $jumlah = DetailFinance::sum('total');
+            $lap = Finance::where('id', $request->finances_id)->first();
+            $fin = $request->all();
+            $fin['jumlah'] = $jumlah;
+            $lap->update($fin);
+
+            return redirect()->back()->with('success', 'Paparan berhasil dihapus!!');
+        } catch (Exception) {
+            return redirect()->back()->with('error', 'Paparan Gagal dihapus!!');
         }
     }
 }

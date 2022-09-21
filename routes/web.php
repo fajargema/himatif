@@ -31,4 +31,7 @@ Route::middleware(['auth:sanctum', 'verified'])->name('dashboard.')->prefix('das
     Route::post('scan/result', [App\Http\Controllers\Admin\MeetController::class, 'scanResult'])->name('meet.scan-result');
 
     Route::resource('finance', App\Http\Controllers\Admin\FinanceController::class);
+    Route::post('add/paparan', [App\Http\Controllers\Admin\FinanceController::class, 'simpanDetail'])->name('finance.add-paparan');
+    Route::put('edit/paparan/{id}', [App\Http\Controllers\Admin\FinanceController::class, 'ubahDetail'])->name('finance.edit-paparan');
+    Route::delete('delete/paparan/{id}', [App\Http\Controllers\Admin\FinanceController::class, 'hapusDetail'])->name('finance.delete-paparan');
 });

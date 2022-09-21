@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Finance extends Model
+class DetailFinance extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'judul', 'jumlah', 'tanggal', 'keterangan', 'jenis', 'users_id'
+        'satuan', 'qty', 'harga', 'total', 'keterangan', 'users_id', 'finances_id'
     ];
 
     public function user()
@@ -18,8 +18,8 @@ class Finance extends Model
         return $this->belongsTo(User::class, 'users_id');
     }
 
-    public function details()
+    public function rapat()
     {
-        return $this->hasMany(DetailFinance::class, 'finances_id', 'id');
+        return $this->hasOne(Finance::class, 'id', 'finances_id');
     }
 }
