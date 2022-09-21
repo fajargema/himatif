@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('kode');
             $table->string('nama');
             $table->text('deskripsi');
-            $table->date('tanggal');
-            $table->time('waktu');
+            $table->dateTime('tgl_waktu');
             $table->string('tempat');
             $table->string('jenis');
             $table->unsignedBigInteger('users_id');

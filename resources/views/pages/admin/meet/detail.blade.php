@@ -13,7 +13,14 @@
             Detail Rapat
         </h5>
 
+        @php
+        $te = Carbon\Carbon::parse($data['tgl_waktu'])->diffInDays(Carbon\Carbon::now());
+        @endphp
+
+        @if ($te == 0)
         <a align="right" href="{{ route('dashboard.meet.scan', $data->id) }}" class="btn btn-info">Scan</a>
+        @endif
+
     </div>
     <div class="card-body">
 
@@ -22,10 +29,10 @@
                 <label><strong>Nama Rapat :</strong></label>
                 <p>{{ $data->nama }}</p>
 
-                <label><strong>Tanggal Jam :</strong></label>
+                <label><strong>Tanggal - Jam :</strong></label>
                 <p>
-                    {{ Carbon\Carbon::parse($data['tanggal'])->isoFormat('dddd, D MMMM Y') }} -
-                    {{ Carbon\Carbon::parse($data['waktu'])->format('H:i:s') }} WIB
+                    {{ Carbon\Carbon::parse($data['tgl_waktu'])->isoFormat('dddd, D MMMM Y') }} -
+                    {{ Carbon\Carbon::parse($data['tgl_waktu'])->format('H:i:s') }} WIB
                 </p>
 
                 <label><strong>Tempat Rapat :</strong></label>
@@ -81,42 +88,42 @@
                         {{-- Cek absen --}}
                         @php
                         $cek = $item->absents->where('meets_id', $data->id)->count();
+                        $waktu = Carbon\Carbon::parse($data['tgl_waktu']);
+                        $tgl_meet = Carbon\Carbon::parse($data['tgl_waktu']);
                         @endphp
 
                         {{-- Kondisi absen --}}
-                        @if ($cek == 0)
-                        <span class="badge badge-warning">Belum Absen</span>
-                        @elseif ($cek >= 1)
+                        @if ($cek >= 1)
 
                         {{-- Ambil Jam Absen --}}
                         @foreach ($item->absents->where('meets_id', $data->id) as $val)
                         {{-- Cek perbandingan Jam Absen --}}
                         @php
-                        $waktu = Carbon\Carbon::parse($data['waktu']);
-                        $tgl_meet = Carbon\Carbon::parse($data['tanggal']);
                         $absen = Carbon\Carbon::parse($val['created_at']);
 
                         $menit = $waktu->diffInMinutes($absen);
-                        $jam = $waktu->diffInHours($absen);
-                        $tgl = $tgl_meet->diffInDays($absen);
 
                         $denda = $menit / 5;
                         $hd = ceil($denda) * 1000;
                         @endphp
 
-                        {{-- Kondii Jam Absen --}}
-                        @if ($jam == 0)
                         <span class="badge badge-success">Sudah Absen</span> <br>
                         {{ Carbon\Carbon::parse($val['created_at'])->format('H:i:s') }} WIB <br>
-                        Terlambat = {{ $menit }} Menit <b>(Denda : {{ rupiah($hd) }})</b>
-                        @elseif ($tgl > 1)
-                        <span class="badge badge-danger">Tidak Absen</span>
-                        @elseif ($jam >= 1)
-                        <span class="badge badge-danger">Belum Absen</span>
-                        {{ Carbon\Carbon::parse($val['created_at'])->format('H:i:s') }} WIB
+
+                        @if ($menit > 15)
+                        @php
+                        $fix = $hd - 3000;
+                        $wk = $menit - 15;
+                        @endphp
+                        Terlambat = {{ $wk }} Menit <b>(Denda : {{ rupiah($fix) }})</b>
                         @endif
 
                         @endforeach
+
+                        @elseif ($te > 0)
+                        <span class="badge badge-danger">Tidak Absen</span>
+                        @elseif ($cek == 0)
+                        <span class="badge badge-warning">Belum Absen</span>
 
                         @endif
                     </td>

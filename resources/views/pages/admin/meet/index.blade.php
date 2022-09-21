@@ -36,8 +36,8 @@
                         <td>{{ $item->nama }}</td>
                         <td>{!! $item->deskripsi!!}</td>
                         <td>
-                            {{ Carbon\Carbon::parse($item['tanggal'])->isoFormat('dddd, D MMMM Y') }} -
-                            {{ Carbon\Carbon::parse($item['waktu'])->format('H:i:s') }} WIB
+                            {{ Carbon\Carbon::parse($item['tgl_waktu'])->isoFormat('dddd, D MMMM Y') }} -
+                            {{ Carbon\Carbon::parse($item['tgl_waktu'])->format('H:i:s') }} WIB
                         </td>
                         <td>{{ $item->tempat }}</td>
                         <td>

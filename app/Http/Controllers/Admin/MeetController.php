@@ -44,8 +44,7 @@ class MeetController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'tanggal' => 'required',
-            'waktu' => 'required',
+            'tgl_waktu' => 'required',
             'jenis' => 'required',
             'deskripsi' => 'required',
             'tempat' => 'required',

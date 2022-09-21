@@ -54,27 +54,24 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                    <label>Tanggal Rapat</label>
-                    <input type="date" class="form-control" name="tanggal" value="{{ old('date') }}">
+                    <label>Tanggal & Jam Rapat</label>
+                    <input type="datetime-local" class="form-control" name="tgl_waktu" value="{{ old('tgl_waktu') }}">
+                    {{-- <input type="date" class="form-control" name="tanggal" value="{{ old('date') }}"> --}}
                 </div>
                 <div class="col-sm-6">
-                    <label>Jam Rapat</label>
-                    <input type="time" class="form-control" name="waktu" value="{{ old('waktu') }}">
+                    <label>Jenis Rapat</label>
+                    <select class="form-control" name="jenis">
+                        <option selected>------Pilih Jenis------</option>
+
+                        <option value="Online">Online</option>
+                        <option value="Offline">Offline</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
                 <label>Deskripsi Rapat</label>
                 <textarea name="deskripsi" class="form-control"
                     placeholder="Deskripsi Produk">{!! old('deskripsi') !!}</textarea>
-            </div>
-            <div class="form-group">
-                <label>Jenis Rapat</label>
-                <select class="form-control" name="jenis">
-                    <option selected>------Pilih Jenis------</option>
-
-                    <option value="Online">Online</option>
-                    <option value="Offline">Offline</option>
-                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Simpan</button>

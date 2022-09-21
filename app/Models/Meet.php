@@ -10,7 +10,7 @@ class Meet extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kode', 'nama', 'deskripsi', 'tanggal', 'waktu', 'tempat', 'jenis', 'users_id'
+        'kode', 'nama', 'deskripsi', 'tgl_waktu', 'tempat', 'jenis', 'users_id'
     ];
 
     public function user()
